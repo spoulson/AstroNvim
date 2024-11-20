@@ -50,13 +50,13 @@ return {
           dap.configurations.go = {
             {
               type = "delve",
-              name = "Debug command",
+              name = "Debug go run",
               request = "launch",
               program = "./${relativeFileDirname}",
             },
             {
               type = "delve",
-              name = "Debug test",
+              name = "Debug go test",
               request = "launch",
               mode = "test",
               program = "./${relativeFileDirname}",
