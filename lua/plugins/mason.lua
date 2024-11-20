@@ -1,6 +1,19 @@
--- if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
-
 -- Customize Mason plugins
+
+-- Prompt for `go test -run` argument.
+local function get_arguments()
+  local args = { "-test.run" }
+  local co = coroutine.running()
+  if co then
+    return coroutine.create(function()
+      vim.ui.input({ prompt = "Test -run: " }, function(input) table.insert(args, input) end)
+      coroutine.resume(co, args)
+    end)
+  else
+    vim.ui.input({ prompt = "Test -run: " }, function(input) table.insert(args, input) end)
+    return args
+  end
+end
 
 ---@type LazySpec
 return {
@@ -60,6 +73,14 @@ return {
               request = "launch",
               mode = "test",
               program = "./${relativeFileDirname}",
+            },
+            {
+              type = "delve",
+              name = "Debug go test -run",
+              request = "launch",
+              mode = "test",
+              program = "./${relativeFileDirname}",
+              args = get_arguments,
             },
           }
         end,
