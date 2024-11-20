@@ -33,7 +33,36 @@ return {
     opts = {
       ensure_installed = {
         "python",
+        "delve",
         -- add more arguments for adding more debuggers
+      },
+      handlers = {
+        delve = function(source_name)
+          local dap = require "dap"
+          dap.adapters.delve = {
+            type = "server",
+            port = "${port}",
+            executable = {
+              command = vim.fn.exepath "dlv",
+              args = { "dap", "-l", "127.0.0.1:${port}" },
+            },
+          }
+          dap.configurations.go = {
+            {
+              type = "delve",
+              name = "Debug go run",
+              request = "launch",
+              program = "./${relativeFileDirname}",
+            },
+            {
+              type = "delve",
+              name = "Debug go test",
+              request = "launch",
+              mode = "test",
+              program = "./${relativeFileDirname}",
+            },
+          }
+        end,
       },
     },
   },
