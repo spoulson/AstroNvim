@@ -1,1 +1,1 @@
-return {"editorconfig/editorconfig-vim", lazy=false}
+return { "editorconfig/editorconfig-vim", lazy = false }

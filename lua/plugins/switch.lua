@@ -1,1 +1,1 @@
-return {"AndrewRadev/switch.vim", lazy=false}
+return { "AndrewRadev/switch.vim", lazy = false }

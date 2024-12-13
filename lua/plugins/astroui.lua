@@ -33,5 +33,8 @@ return {
       LSPLoading9 = "⠇",
       LSPLoading10 = "⠏",
     },
+    icon_highlights = {
+      breadcrumbs = true,
+    },
   },
 }
